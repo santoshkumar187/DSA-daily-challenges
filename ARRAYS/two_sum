@@ -1,0 +1,93 @@
+2 Sum Problem (Array – DSA)
+🔹 Problem Statement
+
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to the target.
+
+👉 Example:
+
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]   // because nums[0] + nums[1] = 2 + 7 = 9
+
+
+// code example
+
+import java.util.*;
+
+public class TwoSumHashMap {
+    public static int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>(); // value -> index
+
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+
+            map.put(nums[i], i);
+        }
+        return new int[]{}; // no solution
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
+
+        int[] result = twoSum(nums, target);
+        if (result.length > 0) {
+            System.out.println("Indices: [" + result[0] + ", " + result[1] + "]");
+        } else {
+            System.out.println("No pair found!");
+        }
+    }
+}
+
+
+
+
+// HASH MAP OVERVIEW  is that datastrucure which store data in form of key values like(banana:20,apple:30) performs operation 
+
+import java.util.*;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        // Adding key-value pairs
+        map.put("Apple", 50);
+        map.put("Banana", 20);
+        map.put("Orange", 30);
+
+        // Accessing values
+        System.out.println("Price of Apple: " + map.get("Apple"));
+
+        // Checking if key exists
+        if (map.containsKey("Banana")) {
+            System.out.println("Banana is present!");
+        }
+
+        // Iterating
+        for (String key : map.keySet()) {
+            System.out.println(key + " → " + map.get(key));
+        }
+    }
+}
+
+
+
+| Method                 | Description               |
+| ---------------------- | ------------------------- |
+| `put(key, value)`      | Inserts key-value pair    |
+| `get(key)`             | Returns value for the key |
+| `containsKey(key)`     | Checks if key exists      |
+| `containsValue(value)` | Checks if value exists    |
+| `remove(key)`          | Removes mapping           |
+| `size()`               | Returns number of pairs   |
+| `keySet()`             | Returns all keys          |
+| `values()`             | Returns all values        |
+
+
+
+
+
+
