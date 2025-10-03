@@ -1,0 +1,98 @@
+What is a Palindrome?
+
+A palindrome is a word, number, or string that reads the same backward as forward.
+👉 Examples:
+
+"madam" → Palindrome
+
+"racecar" → Palindrome
+
+"hello" → Not a palindrome
+
+"malayalam" -> is palindrome
+
+
+****//code for palindrom check******  boolean
+
+import java.util.Scanner;
+
+public class PalindromeCheck {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Take input from user
+        System.out.print("Enter a word: ");
+        String str = sc.nextLine();
+
+        // Convert to lowercase (to avoid case issues)
+        str = str.toLowerCase();
+
+        // Check if palindrome
+        boolean isPalindrome = true;
+        int left = 0;
+        int right = str.length() - 1;
+
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                isPalindrome = false;
+                break;
+            }
+            left++;
+            right--;
+        }
+
+        // Print result
+        if (isPalindrome) {
+            System.out.println(str + " is a Palindrome.");
+        } else {
+            System.out.println(str + " is NOT a Palindrome.");
+        }
+    }
+}
+
+
+
+
+
+
+******// for loop
+
+
+import java.util.Scanner;
+
+public class PalindromeCheck {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Take input from user
+        System.out.print("Enter a word: ");
+        String str = sc.nextLine().toLowerCase(); // convert to lowercase
+
+        boolean isPalindrome = true;
+
+        // Use for loop to compare characters from both ends
+        for (int i = 0; i < str.length() / 2; i++) {
+            if (str.charAt(i) != str.charAt(str.length() - 1 - i)) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        // Print result
+        if (isPalindrome) {
+            System.out.println(str + " is a Palindrome.");
+        } else {
+            System.out.println(str + " is NOT a Palindrome.");
+        }
+    }
+}
+
+
+
+
+*****// data structure////****stack
+
+
+
+
+
