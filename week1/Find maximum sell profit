@@ -1,0 +1,64 @@
+Problem Understanding
+
+You are given the price of a stock on each day.
+You can buy once and sell once later.
+You must find the maximum profit you can make.
+
+For example:
+
+Prices = [7, 1, 5, 3, 6, 4]
+
+
+Here:
+
+You can buy at 1
+
+Sell at 6
+
+Profit = 6 - 1 = 5
+✅ So, maximum profit = 5
+
+
+
+******// code exmaple //*****
+
+public class MaxProfit {
+    public static int maxProfit(int[] prices) {
+        int minPrice = prices[0];
+        int maxProfit = 0;
+
+        // Go through each price
+        for (int price : prices) {
+            // If current price is smaller, update minPrice
+            if (price < minPrice) {
+                minPrice = price;
+            }
+            // Calculate profit if we sell today
+            int profit = price - minPrice;
+
+            // Update maxProfit if current profit is greater
+            if (profit > maxProfit) {
+                maxProfit = profit;
+            }
+        }
+
+        return maxProfit;
+    }
+
+    public static void main(String[] args) {
+        int[] prices = {7, 1, 5, 3, 6, 4};
+        System.out.println("Maximum Profit: " + maxProfit(prices));
+    }
+}
+
+// output///
+💡 Output:
+Maximum Profit: 5
+
+🧠 Explanation:
+
+Buy when price is lowest (1)
+
+Sell when price is highest after that (6)
+
+Profit = 6 - 1 = 5
