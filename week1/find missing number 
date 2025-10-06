@@ -1,0 +1,56 @@
+You are given an array nums containing n distinct integers from the range [0, n].
+Find the one number that is missing from this range.
+
+
+---
+
+💡 Example
+
+Input: nums = [3, 0, 1]
+Output: 2
+
+Explanation:
+The numbers should be [0, 1, 2, 3].
+But 2 is missing.
+
+
+✅ Approach 1: Using Formula (Sum Method)
+
+We know the sum of first n natural numbers:
+
+\text{Sum} = n \times (n + 1) / 2
+
+If we subtract the sum of array elements from the expected sum, we get the missing number.
+
+
+---
+
+🧩 Java Code (Efficient O(n))
+
+class MissingNumber {
+    public static int missingNumber(int[] nums) {
+        int n = nums.length;
+        int expectedSum = n * (n + 1) / 2;
+        int actualSum = 0;
+        
+        for (int num : nums) {
+            actualSum += num;
+        }
+        
+        return expectedSum - actualSum;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {3, 0, 1};
+        System.out.println("Missing Number: " + missingNumber(nums));
+    }
+}
+
+
+---
+
+⚙️ Output
+
+Missing Number: 2
+
+
