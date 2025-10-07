@@ -1,0 +1,139 @@
+Awesome choice 💪 — this is a classic DSA string manipulation problem often asked in interviews like at Amazon, TCS, or Infosys.
+
+Let’s go step-by-step, from problem understanding → logic → code → explanation — in beginner-friendly style 👇
+
+
+---
+
+🧠 Problem: Reverse Words in a String
+
+❓ Question:
+
+You’re given a string s that may contain words separated by spaces.
+Your task:
+👉 Reverse the order of words,
+👉 Remove extra spaces,
+👉 Return the cleaned, reversed string.
+
+
+---
+
+🔹 Example 1
+
+Input:  "  the sky  is blue  "
+Output: "blue is sky the"
+
+Explanation:
+
+Original words: ["the", "sky", "is", "blue"]
+
+Reversed: ["blue", "is", "sky", "the"]
+
+Joined with single spaces → "blue is sky the"
+
+
+
+---
+
+🔹 Example 2
+
+Input:  "hello world"
+Output: "world hello"
+
+
+---
+
+🧩 Step-by-Step Beginner Explanation
+
+Let’s break it down:
+
+Step 1️⃣ – Split the String
+
+The method split("\\s+") splits the string into words (using regex to handle multiple spaces).
+
+
+String[] words = s.trim().split("\\s+");
+
+👉 trim() removes spaces at start and end.
+👉 split("\\s+") splits wherever there’s one or more spaces.
+
+For "  the sky  is blue  " →
+words = ["the", "sky", "is", "blue"]
+
+
+---
+
+Step 2️⃣ – Reverse the Words
+
+We can reverse the array of words manually or use a library method.
+
+
+---
+
+Step 3️⃣ – Join Back into a Single String
+
+Use String.join(" ", array) to combine words with a single space.
+
+
+Java Code: Clean & Simple
+
+public class ReverseWords {
+    public static String reverseWords(String s) {
+        // Step 1: Remove extra spaces and split
+        String[] words = s.trim().split("\\s+");
+        
+        // Step 2: Reverse words
+        StringBuilder reversed = new StringBuilder();
+        for (int i = words.length - 1; i >= 0; i--) {
+            reversed.append(words[i]);
+            if (i != 0) reversed.append(" "); // add space between words
+        }
+        
+        // Step 3: Return reversed string
+        return reversed.toString();
+    }
+
+    public static void main(String[] args) {
+        String s = "  the sky  is blue  ";
+        System.out.println(reverseWords(s)); // Output: blue is sky the
+    }
+}
+
+
+---
+
+🧮 Dry Run
+
+Input: "  the sky  is blue  "
+
+After trim() → "the sky  is blue"
+
+After split("\\s+") → ["the", "sky", "is", "blue"]
+
+Reverse order → ["blue", "is", "sky", "the"]
+
+Join → "blue is sky the"
+
+
+✅ Output → "blue is sky the"
+
+
+---
+
+⚙️ Complexity
+
+Operation	Time	Space
+
+Splitting & joining	O(n)	O(n)
+
+
+
+---
+
+🧾 Interview Tips
+
+Mention trim() and split("\\s+") to handle extra spaces.
+
+Always reverse words, not characters.
+
+StringBuilder is preferred over string concatenation for efficiency.
