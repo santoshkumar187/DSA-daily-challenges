@@ -1,0 +1,135 @@
+Problem statement You are given an N x M integer matrix. Your task is to modify this matrix in place so that if any cell contains the value 0, 
+then all cells in the same row and column as that cell should also be set to 0.
+
+
+
+
+🧩 Problem Summary
+You are given a 2D grid of numbers (called a matrix). Your job is to change the grid so that:
+
+If any cell in the grid has a 0, then:
+
+Set all cells in the same row to 0
+
+Set all cells in the same column to 0
+
+⚠️ You must do this in place, meaning:
+
+You cannot use another matrix to help you.
+
+You must modify the original matrix directly.
+
+📌 Example
+Let's say the input matrix is:
+
+Code
+[7, 19, 3]
+[4, 21, 0]
+Here, the cell at position [1][2] (second row, third column) is 0.
+
+So we must:
+
+Set entire row 1 to 0: [0, 0, 0]
+
+Set entire column 2 to 0: [7, 19, 0]
+
+✅ Final matrix becomes:
+
+Code
+[7, 19, 0]
+[0,  0, 0]
+🧠 How the Code Works (Step-by-Step)
+We want to avoid using extra space, so we use the first row and first column of the matrix to store markers (flags) that help us remember which rows and columns should be zeroed.
+
+Step 1: Mark the rows and columns that need to be zeroed
+Loop through the entire matrix.
+
+If you find a 0, mark its row and column by setting:
+
+matrix[i][0] = 0 → marks the row
+
+matrix[0][j] = 0 → marks the column
+
+Also, remember if the first row or first column originally had a 0 (using firstRow and firstCol flags).
+
+Step 2: Use the markers to update the inner matrix
+Loop through the matrix excluding the first row and column.
+
+If the marker for that row or column is 0, set the cell to 0.
+
+Step 3: Update the first row if needed
+If firstRow is true, set all cells in the first row to 0.
+
+Step 4: Update the first column if needed
+If firstCol is true, set all cells in the first column to 0.
+
+
+
+
+
+
+/// code example////
+
+
+public class MatrixZeroExample {
+    public static void main(String[] args) {
+        // Step 0: Create a sample matrix
+        int[][] matrix = {
+            {7, 19, 3},
+            {4, 21, 0}
+        };
+
+        // Step 1: Call the function to modify the matrix
+        setZeros(matrix);
+
+        // Step 2: Print the modified matrix
+        System.out.println("Modified Matrix:");
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void setZeros(int[][] matrix) {
+        boolean firstRow = false, firstCol = false;
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        // Step 1: Mark rows and columns that need to be zeroed
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] == 0) {
+                    if (i == 0) firstRow = true;
+                    if (j == 0) firstCol = true;
+                    matrix[0][j] = 0; // mark column
+                    matrix[i][0] = 0; // mark row
+                }
+            }
+        }
+
+        // Step 2: Use markers to set inner cells to zero
+        for (int i = 1; i < rows; i++) {
+            for (int j = 1; j < cols; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        // Step 3: Zero out first row if needed
+        if (firstRow) {
+            for (int j = 0; j < cols; j++) {
+                matrix[0][j] = 0;
+            }
+        }
+
+        // Step 4: Zero out first column if needed
+        if (firstCol) {
+            for (int i = 0; i < rows; i++) {
+                matrix[i][0] = 0;
+            }
+        }
+    }
+}
