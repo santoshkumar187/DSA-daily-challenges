@@ -1,0 +1,66 @@
+Write a Java program that calculates Fibonacci numbers based on user input.
+
+Problem Definition
+
+The Fibonacci sequence is:
+
+0, 1, 1, 2, 3, 5, 8, 13, 21, ...
+
+
+Each number is the sum of the previous two numbers.
+
+Formula:
+
+F(0) = 0, F(1) = 1
+F(n) = F(n-1) + F(n-2), for n > 1
+
+
+Example:
+
+Input: n = 6
+
+Output: 8 (Sequence: 0,1,1,2,3,5,8)
+
+
+
+
+// code example//
+
+import java.util.Scanner;
+
+public class FibonacciUserInput {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Take user input
+        System.out.print("Enter the position n: ");
+        int n = sc.nextInt();
+
+        // Edge cases
+        if (n == 0) {
+            System.out.println("Fibonacci number at position 0 is 0");
+            return;
+        }
+        if (n == 1) {
+            System.out.println("Fibonacci number at position 1 is 1");
+            return;
+        }
+
+        // Iterative calculation
+        int a = 0, b = 1, c = 0;
+        for (int i = 2; i <= n; i++) {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+
+        System.out.println("Fibonacci number at position " + n + " is " + c);
+    }
+}
+
+
+
+
+Enter the position n: 6
+Fibonacci number at position 6 is 8
+
