@@ -1,0 +1,87 @@
+📝 Problem Statement:
+
+/// largest///
+Given an array of integers, find and print the largest number.
+
+Example:
+
+Input: [10, 25, 3, 67, 89, 42]
+Output: 89
+
+💻 Java Code:
+public class LargestInArray {
+    public static void main(String[] args) {
+        int[] arr = {10, 25, 3, 67, 89, 42};
+        int max = arr[0];  // assume first element is max
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+
+        System.out.println("Largest element is: " + max);
+    }
+}
+
+
+
+⚙️ Explanation:
+
+Start with first element as max.
+
+Compare each element of the array with max.
+
+If you find a bigger number, update max.
+
+After the loop ends → max holds the largest value.
+
+🧩 Output:
+Largest element is: 89
+
+**********************************
+
+//samllest ///
+
+
+📝 Problem Statement:
+
+Given an array of integers, find and print the smallest (minimum) number.
+
+Example:
+
+Input: [10, 25, 3, 67, 89, 42]
+Output: 3
+
+💻 Java Code:
+public class SmallestInArray {
+    public static void main(String[] args) {
+        int[] arr = {10, 25, 3, 67, 89, 42};
+        int min = arr[0]; // assume first element is smallest
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+
+        System.out.println("Smallest element is: " + min);
+    }
+}
+
+⚙️ Explanation:
+
+Assume the first element is the smallest (min = arr[0]).
+
+Compare each element with min.
+
+If a smaller element is found, update min.
+
+After the loop → min holds the smallest value.
+
+🧩 Output:
+Smallest element is: 3
+
+
+✅ Time Complexity: O(n)
+✅ Space Complexity: O(1)
