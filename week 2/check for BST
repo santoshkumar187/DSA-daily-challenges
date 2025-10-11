@@ -1,0 +1,52 @@
+
+/*
+Given a binary tree, determine if it is a valid BST.
+
+A BST is defined as:
+Left subtree of a node contains only nodes with values less than the node’s value.
+Right subtree of a node contains only nodes with values greater than the node’s value.
+Both left and right subtrees must also be BSTs
+
+
+*/
+
+
+/*
+function isBST(node, min, max):
+    if node is null:
+        return true
+
+    if node.value <= min OR node.value >= max:
+        return false
+
+    return isBST(node.left, min, node.value) 
+           AND isBST(node.right, node.value, max)
+
+
+
+*/
+
+class TreeNode {
+    int val;
+    TreeNode left, right;
+
+    TreeNode(int val) {
+        this.val = val;
+        left = right = null;
+    }
+}
+
+public class Solution {
+    public static boolean isValidBST(TreeNode root) {
+        return helper(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private static boolean helper(TreeNode node, long min, long max) {
+        if (node == null) return true;
+
+        if (node.val <= min || node.val >= max) return false;
+
+        return helper(node.left, min, node.val) &&
+               helper(node.right, node.val, max);
+    }
+}
