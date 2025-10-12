@@ -1,0 +1,63 @@
+
+/*
+Given an array of positive integers candidates and an integer target, return all unique combinations where the chosen numbers sum to target.
+You may use each number unlimited times. Order inside a combination doesn’t matter (i.e., [2,2,3] equals [2,3,2]).
+
+*/
+function combinationSum(candidates, target):
+    sort(candidates)                          # helps with pruning and stable order
+    result = []
+    path = []
+
+    function dfs(start, remain):
+        if remain == 0:
+            result.add(copy(path))
+            return
+        for i from start to len(candidates)-1:
+            x = candidates[i]
+            if x > remain: break               # prune
+            path.push(x)
+            dfs(i, remain - x)                 # i (not i+1): reuse allowed
+            path.pop()
+
+    dfs(0, target)
+    return result
+
+
+/*
+
+import java.util.*;
+
+public class CombinationSumA {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        Arrays.sort(candidates);                      // optional but useful
+        List<List<Integer>> ans = new ArrayList<>();
+        backtrack(candidates, target, 0, new ArrayList<>(), ans);
+        return ans;
+    }
+
+    private void backtrack(int[] nums, int remain, int start,
+                           List<Integer> path, List<List<Integer>> ans) {
+        if (remain == 0) {
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = start; i < nums.length; i++) {
+            int x = nums[i];
+            if (x > remain) break;                    // pruning
+            path.add(x);
+            backtrack(nums, remain - x, i, path, ans);// reuse allowed
+            path.remove(path.size() - 1);
+        }
+    }
+
+    // quick demo
+    public static void main(String[] args) {
+        CombinationSumA s = new CombinationSumA();
+        System.out.println(s.combinationSum(new int[]{2,3,6,7}, 7));
+        // [[2, 2, 3], [7]]
+    }
+}
+
+
+*/
