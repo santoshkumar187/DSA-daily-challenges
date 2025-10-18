@@ -60,3 +60,8 @@ public class LinkedListMiddle {
         System.out.println("Middle node data: " + (middle != null ? middle.data : "List is empty"));
     }
 }
+
+///output/////
+
+Linked List: 1 → 2 → 3 → 4 → 5 → null
+Middle node data: 3
