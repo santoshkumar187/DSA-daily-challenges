@@ -1,3 +1,6 @@
+linkedlist ex: 10 → 20 → 30 → null.
+
+
 // Main class that contains all logic
 public class LinkedListMiddle {
 
@@ -65,3 +68,25 @@ public class LinkedListMiddle {
 
 Linked List: 1 → 2 → 3 → 4 → 5 → null
 Middle node data: 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
