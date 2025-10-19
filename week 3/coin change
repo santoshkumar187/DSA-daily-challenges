@@ -1,0 +1,94 @@
+/*
+You are given an integer array coins representing different coin denominations and an integer amount representing a total amount of money.
+Return the minimum number of coins that you need to make up that amount.
+If that amount cannot be made up by any combination of coins, return -1.
+
+✅ Example
+Input: coins = [1,2,5], amount = 11
+Output: 3
+Explanation: 11 = 5 + 5 + 1
+
+
+*/
+
+
+/*
+function coinChange(coins, amount):
+    dp = array of size amount+1, filled with INF
+    dp[0] = 0
+    
+    for i from 1 to amount:
+        for coin in coins:
+            if i - coin >= 0:
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+    
+    if dp[amount] == INF:
+        return -1
+    return dp[amount]
+
+
+
+*/
+
+
+
+import java.util.*;
+
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int max = amount + 1;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+
+        for (int i = 1; i <= amount; i++) {
+            for (int coin : coins) {
+                if (i - coin >= 0) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+}
+
+
+
+
+
+import java.util.Arrays;
+
+public class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int max = amount + 1; // Use amount+1 as a placeholder for infinity
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max); // Initialize all values to max
+        dp[0] = 0; // Base case: 0 coins needed to make amount 0
+
+        // Build up the dp array
+        for (int i = 1; i <= amount; i++) {
+            for (int coin : coins) {
+                if (i - coin >= 0) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+
+        // If dp[amount] is still max, it means no combination was found
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+
+    // Sample test
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] coins = {1, 2, 5};
+        int amount = 11;
+        int result = sol.coinChange(coins, amount);
+        System.out.println("Minimum coins needed: " + result); // Output: 3
+    }
+}
+
+Minimum coins needed: 3
+
+=== Code Execution Successful ===
