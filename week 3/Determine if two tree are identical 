@@ -1,0 +1,45 @@
+/*
+Given two binary trees, check whether they are identical.
+Two binary trees are identical if:
+
+They have the same structure.
+
+Nodes at every corresponding position have the same value.
+
+
+*/
+
+
+/*
+function isIdentical(root1, root2):
+    if root1 == null and root2 == null:
+        return true
+    if root1 == null or root2 == null:
+        return false
+    return (root1.val == root2.val) 
+           AND isIdentical(root1.left, root2.left) 
+           AND isIdentical(root1.right, root2.right)
+
+
+
+*/
+
+class TreeNode {
+    int val;
+    TreeNode left, right;
+    TreeNode(int val) {
+        this.val = val;
+        left = right = null;
+    }
+}
+
+class Solution {
+    public boolean isIdentical(TreeNode p, TreeNode q) {
+        if (p == null && q == null) return true;
+        if (p == null || q == null) return false;
+
+        return (p.val == q.val) &&
+               isIdentical(p.left, q.left) &&
+               isIdentical(p.right, q.right);
+    }
+}
