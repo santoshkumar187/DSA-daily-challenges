@@ -1,0 +1,120 @@
+/*
+
+Problem statement
+You are given two strings 'S' and 'T' of lengths 'N' and 'M' respectively. Find the "Edit Distance" between the strings.
+
+Edit Distance of two strings is the minimum number of steps required to make one string equal to the other. In order to do so, you can perform the following three operations:
+
+1. Delete a character
+2. Replace a character with another one
+3. Insert a character
+Note:
+Strings don't contain spaces in between.
+
+*/
+
+
+
+public class Solution {
+
+    public static int editDistance(String str1, String str2) {
+        int m = str1.length();
+        int n = str2.length();
+
+        int dp[][] = new int[m+1][n+1];
+
+        //initlizeing
+        for(int i=1; i<=m; i++) {
+            dp[i][0] = i;
+        }
+        for(int j=1; j<=n; j++) {
+            dp[0][j] = j;
+        }
+
+        // fill the cells
+        for(int i=1; i<=m; i++) {
+            for(int j=1; j<=n; j++) {
+                if(str1.charAt(i - 1) == str2.charAt(j - 1)) { //same char
+                    //copy from just left-top diagonal
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    // min of top, left, left-top(diagonal) element
+                    int left = dp[i][j - 1];
+                    int top = dp[i - 1][j];
+                    int leftTop = dp[i - 1][j - 1];
+                    dp[i][j] = Math.min(leftTop, Math.min(left, top)) + 1;
+                }             
+            }
+        }
+
+        return dp[m][n];
+    }
+}
+
+
+
+
+
+/////////////////OR//////////
+
+
+
+
+/*
+Problem statement:
+You are given two strings 'S' and 'T' of lengths 'N' and 'M' respectively. Find the "Edit Distance" between the strings.
+
+Edit Distance of two strings is the minimum number of steps required to make one string equal to the other. In order to do so, you can perform the following three operations:
+1. Delete a character
+2. Replace a character with another one
+3. Insert a character
+
+Note: Strings don't contain spaces in between.
+*/
+
+public class Solution {
+
+    public static int editDistance(String str1, String str2) {
+        int m = str1.length();
+        int n = str2.length();
+
+        int[][] dp = new int[m + 1][n + 1];
+
+        // Initialize base cases
+        for (int i = 0; i <= m; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= n; j++) {
+            dp[0][j] = j;
+        }
+
+        // Fill the DP table
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1]; // No operation needed
+                } else {
+                    int insert = dp[i][j - 1];
+                    int delete = dp[i - 1][j];
+                    int replace = dp[i - 1][j - 1];
+                    dp[i][j] = Math.min(replace, Math.min(insert, delete)) + 1;
+                }
+            }
+        }
+
+        return dp[m][n];
+    }
+
+    public static void main(String[] args) {
+        String S = "horse";
+        String T = "ros";
+
+        int result = editDistance(S, T);
+        System.out.println("Edit Distance between \"" + S + "\" and \"" + T + "\" is: " + result);
+    }
+}
+
+
+output
+
+Edit Distance between "horse" and "ros" is: 3
