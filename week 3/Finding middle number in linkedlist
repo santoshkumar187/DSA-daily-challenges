@@ -1,0 +1,52 @@
+/*
+
+Given a singly linked list, return the middle node.
+If the list has an odd number of nodes → return the exact middle.
+If the list has an even number of nodes → return the second middle (common convention).
+
+*/
+
+
+/*
+function findMiddle(head):
+    if head is null:
+        return null
+
+    slow = head
+    fast = head
+
+    while fast != null AND fast.next != null:
+        slow = slow.next
+        fast = fast.next.next
+
+    return slow
+
+
+
+*/
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+public class Solution {
+    public static ListNode findMiddle(ListNode head) {
+        if (head == null) return null;
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;        // moves 1 step
+            fast = fast.next.next;   // moves 2 steps
+        }
+
+        return slow; // slow is now at middle
+    }
+}
