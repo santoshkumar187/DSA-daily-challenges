@@ -1,0 +1,96 @@
+
+🔍 Problem Statement
+You're given an array nums[] of integers. Your task is to find the length of the longest arithmetic subsequence.
+
+✨ Definitions
+Subsequence: A sequence derived by deleting some elements (without changing the order).
+
+Arithmetic subsequence: A subsequence where the difference between consecutive elements is constant.
+
+🧠 Core Idea
+We want to find the maximum length of any arithmetic subsequence in the array. To do this, we track:
+
+Every possible difference between pairs of elements.
+
+The length of the arithmetic subsequence ending at each index with that difference.
+
+This is a classic Dynamic Programming with HashMap problem.
+
+
+Dynamic Programming (DP) is a powerful technique used in computer science and
+programming to solve complex problems by breaking them down into simpler subproblems, solving 
+each subproblem once, and storing their solutions to avoid redundant work.
+
+
+A HashMap is a data structure that allows you to store and retrieve data using key-value pairs, 
+with fast access time — typically O(1) on average.
+
+
+
+/*
+You are given an array nums of integers.
+Your task is to find the length of the longest arithmetic subsequence in nums.
+
+👉 An arithmetic subsequence is a subsequence where the difference between any two consecutive elements is the same.
+Input: nums = [3, 6, 9, 12]
+Output: 4
+Explanation: The whole array is an arithmetic subsequence (difference = 3).
+
+Input: nums = [9, 4, 7, 2, 10]
+Output: 3
+Explanation: The longest arithmetic subsequences are [4, 7, 10] or [9, 7, 5].
+
+
+
+*/
+
+
+/*
+function longestArithSeqLength(nums):
+    n = nums.length
+    dp = array of hashmaps of size n
+    result = 2
+
+    for i from 0 to n-1:
+        for j from 0 to i-1:
+            diff = nums[i] - nums[j]
+            if dp[j] contains diff:
+                dp[i][diff] = dp[j][diff] + 1
+            else:
+                dp[i][diff] = 2
+            result = max(result, dp[i][diff])
+
+    return result
+
+
+
+*/
+
+
+import java.util.*;
+
+class Solution {
+    public int longestArithSeqLength(int[] nums) {
+        int n = nums.length;
+        if (n <= 2) return n;
+
+        // dp[i] -> map of difference to length of arithmetic subsequence ending at i
+        Map<Integer, Integer>[] dp = new HashMap[n];
+        for (int i = 0; i < n; i++) {
+            dp[i] = new HashMap<>();
+        }
+
+        int result = 2;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                int diff = nums[i] - nums[j];
+                int len = dp[j].getOrDefault(diff, 1) + 1; // start with 2
+                dp[i].put(diff, len);
+                result = Math.max(result, len);
+            }
+        }
+
+        return result;
+    }
+}
