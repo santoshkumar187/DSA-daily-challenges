@@ -1,0 +1,69 @@
+
+/*
+Given a string consisting of digits (0-9), find the length of the longest even length substring such that the sum of digits 
+in the first half is equal to the sum of digits in the second half.
+
+Example:
+Input:  s = "123123"
+Output: 6
+Explanation: The whole string "123123" has sum(1+2+3) = 6 and sum(1+2+3) = 6.
+
+
+
+*/
+
+
+/*
+function longestEvenSubstring(s):
+    n = length(s)
+    maxLen = 0
+    
+    for i from 0 to n-1:
+        for j from i+1 to n-1 step 2:  # only even length substrings
+            mid = (i + j) / 2
+            leftSum = sum of digits from i to mid
+            rightSum = sum of digits from mid+1 to j
+            if leftSum == rightSum:
+                maxLen = max(maxLen, j-i+1)
+    
+    return maxLen
+
+
+
+*/
+
+
+public class Solution {
+    public static int findLongestEvenSubstring(String s) {
+        int n = s.length();
+        int maxLen = 0;
+
+        // prefix sum of digits
+        int[] prefix = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            prefix[i + 1] = prefix[i] + (s.charAt(i) - '0');
+        }
+
+        // check all even substrings
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j += 2) { // even length
+                int mid = (i + j) / 2;
+                int leftSum = prefix[mid + 1] - prefix[i];
+                int rightSum = prefix[j + 1] - prefix[mid + 1];
+
+                if (leftSum == rightSum) {
+                    maxLen = Math.max(maxLen, j - i + 1);
+                }
+            }
+        }
+        return maxLen;
+    }
+
+    public static void main(String[] args) {
+        String s1 = "123123";
+        String s2 = "1538023";
+
+        System.out.println("Input: " + s1 + " -> Output: " + findLongestEvenSubstring(s1));
+        System.out.println("Input: " + s2 + " -> Output: " + findLongestEvenSubstring(s2));
+    }
+}
