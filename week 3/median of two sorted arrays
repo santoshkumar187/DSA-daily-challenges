@@ -1,0 +1,166 @@
+/*
+You are given two sorted arrays nums1 and nums2 of size m and n respectively.
+Find the median of the two sorted arrays.
+
+👉 The overall run time complexity should be O(log(min(m, n))).
+
+
+*/
+
+/*
+function findMedianSortedArrays(nums1, nums2):
+    if length(nums1) > length(nums2):
+        swap(nums1, nums2)
+
+    m = length(nums1), n = length(nums2)
+    low = 0, high = m
+
+    while low <= high:
+        i = (low + high) / 2
+        j = (m + n + 1)/2 - i
+
+        maxLeft1 = (i == 0) ? -∞ : nums1[i-1]
+        minRight1 = (i == m) ? +∞ : nums1[i]
+        maxLeft2 = (j == 0) ? -∞ : nums2[j-1]
+        minRight2 = (j == n) ? +∞ : nums2[j]
+
+        if maxLeft1 <= minRight2 && maxLeft2 <= minRight1:
+            if (m+n) % 2 == 0:
+                return (max(maxLeft1,maxLeft2) + min(minRight1,minRight2)) / 2
+            else:
+                return max(maxLeft1, maxLeft2)
+        else if maxLeft1 > minRight2:
+            high = i - 1
+        else:
+            low = i + 1
+
+
+
+*/
+
+
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length) {
+            return findMedianSortedArrays(nums2, nums1); // Ensure nums1 is smaller
+        }
+
+        int m = nums1.length;
+        int n = nums2.length;
+        int low = 0, high = m;
+
+        while (low <= high) {
+            int i = (low + high) / 2;
+            int j = (m + n + 1) / 2 - i;
+
+            int maxLeft1 = (i == 0) ? Integer.MIN_VALUE : nums1[i - 1];
+            int minRight1 = (i == m) ? Integer.MAX_VALUE : nums1[i];
+            int maxLeft2 = (j == 0) ? Integer.MIN_VALUE : nums2[j - 1];
+            int minRight2 = (j == n) ? Integer.MAX_VALUE : nums2[j];
+
+            if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {
+                if ((m + n) % 2 == 0) {
+                    return (Math.max(maxLeft1, maxLeft2) + Math.min(minRight1, minRight2)) / 2.0;
+                } else {
+                    return Math.max(maxLeft1, maxLeft2);
+                }
+            } else if (maxLeft1 > minRight2) {
+                high = i - 1;
+            } else {
+                low = i + 1;
+            }
+        }
+
+        throw new IllegalArgumentException();
+    }
+}
+
+
+
+
+******************************************************
+
+
+
+alternate code for abovr program
+
+
+import java.util.Scanner;
+
+public class MedianOfTwoSortedArrays {
+
+    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length) {
+            return findMedianSortedArrays(nums2, nums1);
+        }
+
+        int m = nums1.length;
+        int n = nums2.length;
+        int low = 0, high = m;
+
+        while (low <= high) {
+            int i = (low + high) / 2;
+            int j = (m + n + 1) / 2 - i;
+
+            int maxLeft1 = (i == 0) ? Integer.MIN_VALUE : nums1[i - 1];
+            int minRight1 = (i == m) ? Integer.MAX_VALUE : nums1[i];
+            int maxLeft2 = (j == 0) ? Integer.MIN_VALUE : nums2[j - 1];
+            int minRight2 = (j == n) ? Integer.MAX_VALUE : nums2[j];
+
+            if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {
+                if ((m + n) % 2 == 0) {
+                    return (Math.max(maxLeft1, maxLeft2) + Math.min(minRight1, minRight2)) / 2.0;
+                } else {
+                    return Math.max(maxLeft1, maxLeft2);
+                }
+            } else if (maxLeft1 > minRight2) {
+                high = i - 1;
+            } else {
+                low = i + 1;
+            }
+        }
+
+        throw new IllegalArgumentException("Input arrays are not sorted properly.");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input for first array
+        System.out.print("Enter size of first array: ");
+        int m = sc.nextInt();
+        int[] nums1 = new int[m];
+        System.out.println("Enter " + m + " sorted elements for first array:");
+        for (int i = 0; i < m; i++) {
+            nums1[i] = sc.nextInt();
+        }
+
+        // Input for second array
+        System.out.print("Enter size of second array: ");
+        int n = sc.nextInt();
+        int[] nums2 = new int[n];
+        System.out.println("Enter " + n + " sorted elements for second array:");
+        for (int i = 0; i < n; i++) {
+            nums2[i] = sc.nextInt();
+        }
+
+        double median = findMedianSortedArrays(nums1, nums2);
+        System.out.println("Median: " + median);
+    }
+}
+
+
+
+
+
+output
+
+Enter size of first array: 3
+Enter 3 sorted elements for first array:
+1 2 3 
+Enter size of second array: 3
+Enter 3 sorted elements for second array:
+4 5 6
+Median: 3.5
+
+=== Code Execution Successful ===
