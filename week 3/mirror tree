@@ -1,0 +1,122 @@
+/*
+
+Given a binary tree, convert it into its mirror tree.
+The mirror of a tree is obtained by swapping the left and right children of every node.
+
+Example
+Original Tree:             Mirror Tree:
+
+      1                          1
+     / \                        / \
+    2   3                      3   2
+   / \  /                      \   / \
+  4  5 6                        6  5  4
+
+
+*/
+
+
+/*
+
+function mirror(node):
+    if node == null:
+        return
+
+    swap(node.left, node.right)
+
+    mirror(node.left)
+    mirror(node.right)
+
+
+
+*/
+
+
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int value) {
+        data = value;
+        left = right = null;
+    }
+}
+
+public class MirrorTree {
+    // Function to convert tree to its mirror
+    public static void mirror(Node root) {
+        if (root == null) return;
+
+        // Swap left and right
+        Node temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+
+        // Recurse for subtrees
+        mirror(root.left);
+        mirror(root.right);
+    }
+
+    // Inorder traversal (to check tree structure)
+    public static void inorder(Node root) {
+        if (root == null) return;
+        inorder(root.left);
+        System.out.print(root.data + " ");
+        inorder(root.right);
+    }
+
+    public static void main(String[] args) {
+        // Example tree
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right.left = new Node(6);
+
+        System.out.print("Original Inorder: ");
+        inorder(root);
+
+        mirror(root);
+
+        System.out.print("\nMirror Inorder: ");
+        inorder(root);
+    }
+}
+
+
+
+
+Sure 👍 — here’s a **simple one-line explanation** of the **Mirror Tree** concept:
+
+> 🔹 **A Mirror Tree** is a binary tree that looks exactly the same when its left and right subtrees are swapped — meaning the tree is **symmetric about its center**.
+
+---
+
+### 💡 Example
+
+#### Symmetric (Mirror) Tree:
+
+```
+        1
+       / \
+      2   2
+     / \ / \
+    3  4 4  3
+```
+
+Left side = Mirror image of right side ✅
+
+#### Not Symmetric (Not Mirror):
+
+```
+        1
+       / \
+      2   2
+       \   \
+        3   3
+```
+
+Left and right subtrees are not mirror images ❌
+
