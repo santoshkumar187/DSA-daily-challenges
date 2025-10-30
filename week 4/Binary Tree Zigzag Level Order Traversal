@@ -1,0 +1,114 @@
+/*
+Given the root of a binary tree, return its zigzag level order traversal:
+
+First level: left → right
+
+Second level: right → left
+
+Third level: left → right
+
+and so on...
+
+Input:
+       3
+      / \
+     9   20
+        /  \
+       15   7
+
+Output: [[3], [20, 9], [15, 7]]
+
+
+
+*/
+
+
+/*
+function zigzagLevelOrder(root):
+    if root == null: return []
+
+    result = []
+    queue = [root]
+    leftToRight = true
+
+    while queue not empty:
+        size = len(queue)
+        level = empty list
+
+        for i in 1..size:
+            node = queue.pop()
+            if leftToRight:
+                level.append(node.val)
+            else:
+                level.insert(0, node.val)
+
+            if node.left: queue.push(node.left)
+            if node.right: queue.push(node.right)
+
+        result.append(level)
+        leftToRight = !leftToRight
+
+    return result
+
+
+
+*/
+
+import java.util.*;
+
+// Definition for a binary tree node
+class TreeNode {
+    int val;
+    TreeNode left, right;
+
+    // Constructor to initialize node value
+    TreeNode(int val) {
+        this.val = val;
+    }
+}
+
+class Solution {
+    // Method to perform zigzag level order traversal
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        // Edge case: if tree is empty
+        if (root == null) return result;
+
+        // Queue for standard level order traversal (BFS)
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        // Flag to control zigzag direction
+        boolean leftToRight = true;
+
+        // Traverse level by level
+        while (!queue.isEmpty()) {
+            int size = queue.size(); // number of nodes at current level
+            LinkedList<Integer> level = new LinkedList<>(); // to store current level values
+
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll(); // get next node
+
+                // Add value based on current direction
+                if (leftToRight) {
+                    level.addLast(node.val); // left to right
+                } else {
+                    level.addFirst(node.val); // right to left
+                }
+
+                // Add child nodes to queue for next level
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+
+            // Add current level to result
+            result.add(level);
+
+            // Flip direction for next level
+            leftToRight = !leftToRight;
+        }
+
+        return result;
+    }
+}
