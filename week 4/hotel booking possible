@@ -1,0 +1,88 @@
+
+/*
+
+You are given:
+
+arr[]: arrival times of guests
+
+dep[]: departure times of guests
+
+K: number of available rooms
+
+Check whether the hotel can accommodate all bookings
+
+Input:
+arr = [1, 3, 5]
+dep = [2, 6, 8]
+K = 1
+
+Output: false
+Explanation: 
+- Guest1: 1 → 2
+- Guest2: 3 → 6 (overlaps with Guest1’s room time)
+With only 1 room, it's not possible.
+
+
+*/
+
+
+/*
+function hotelBookingsPossible(arr, dep, K):
+    sort(arr)
+    sort(dep)
+    i = 0, j = 0, rooms = 0
+
+    while i < n and j < n:
+        if arr[i] < dep[j]:
+            rooms++
+            if rooms > K:
+                return false
+            i++
+        else:
+            rooms--
+            j++
+
+    return true
+
+
+
+*/
+
+
+import java.util.*;
+
+class Solution {
+    public boolean hotelBookingsPossible(int[] arr, int[] dep, int K) {
+        int n = arr.length;
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+
+        int i = 0, j = 0;
+        int rooms = 0;
+
+        while (i < n && j < n) {
+            if (arr[i] < dep[j]) {
+                rooms++;
+                if (rooms > K) return false;
+                i++;
+            } else {
+                rooms--;
+                j++;
+            }
+        }
+        return true;
+    }
+}
+
+
+ouput
+
+Enter number of bookings: 3
+Enter arrival times:
+1 2 3
+Enter departure times:
+1 3 3
+Enter number of available rooms (K): 2
+? Booking possible with 2 rooms.
+
+=== Code Execution Successful ===
