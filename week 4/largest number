@@ -1,0 +1,81 @@
+/*
+Given a list of non-negative integers, arrange them such that they form the largest possible number.
+
+Since the result may be very large, return it as a string instead of an integer.
+
+
+*/
+
+    
+/*
+function largestNumber(nums):
+    convert each number to string
+    sort numbers with custom comparator:
+        if a+b > b+a then a comes before b
+    join sorted numbers into result
+    if result starts with "0":
+        return "0"
+    return result
+
+
+
+*/
+
+import java.util.*;
+
+class Solution {
+    public String largestNumber(int[] nums) {
+        // Convert numbers to strings
+        String[] arr = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            arr[i] = String.valueOf(nums[i]);
+        }
+
+        // Sort with custom comparator
+        Arrays.sort(arr, (a, b) -> (b + a).compareTo(a + b));
+
+        // If the largest is "0", return "0"
+        if (arr[0].equals("0")) return "0";
+
+        // Build result
+        StringBuilder sb = new StringBuilder();
+        for (String s : arr) {
+            sb.append(s);
+        }
+        return sb.toString();
+    }
+}
+
+
+or
+
+
+
+
+import java.util.*;
+
+class Solution {
+    public String largestNumber(int[] nums) {
+        String[] arr = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            arr[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(arr, (a, b) -> (b + a).compareTo(a + b));
+        if (arr[0].equals("0")) return "0";
+        StringBuilder sb = new StringBuilder();
+        for (String s : arr) {
+            sb.append(s);
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] nums = {1, 2, 3, 4, 5};  // Example input
+        System.out.println(sol.largestNumber(nums));
+    }
+}
+
+
+ouput
+54321
