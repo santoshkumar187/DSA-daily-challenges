@@ -1,0 +1,34 @@
+/*
+You are given an array candyType where each element represents a type of candy.
+
+You must distribute exactly half of the candies to your sister.
+
+Return the maximum number of different types of candies she can get.
+
+
+*/
+
+
+/*
+function distributeCandies(candyType):
+    n = length(candyType)
+    uniqueTypes = size of set(candyType)
+    return min(uniqueTypes, n/2)
+
+
+
+*/
+
+
+
+import java.util.*;
+
+public class Solution {
+    public int distributeCandies(int[] candyType) {
+        Set<Integer> set = new HashSet<>();
+        for (int candy : candyType) {
+            set.add(candy);
+        }
+        return Math.min(set.size(), candyType.length / 2);
+    }
+}
